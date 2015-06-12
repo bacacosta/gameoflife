@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="utf-8" />
+	<title>Conway's Game of Life</title>
+</head>
+
+<body>
+	<h1>Conway's Game of Life</h1>
+
+	<form th:if="${param.grid == null}" name="startGameOfLife" th:action="@{/start}" method="POST">
+		<input type="submit" value="Start Game of Life" />
+	</form>
+
+	<form th:if="${param.grid != null and !#strings.isEmpty(param.grid[0])}" name="playNextGeneration" th:action="@{/playNext}" method="POST">
+		<input type="submit" value="Play Next Generation" />
+	</form>
+
+	<p th:if="${param.grid == null}">Click on button above to generate first grid.</p>
+	<p th:if="${param.grid != null and #strings.isEmpty(param.grid[0])}">They are all dead!</p>
+	<pre th:text="${param.grid[0]}" th:unless="${param.grid == null}"></pre>
+</body>
+
+</html>
